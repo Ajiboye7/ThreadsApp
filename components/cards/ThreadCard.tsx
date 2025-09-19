@@ -57,7 +57,7 @@ function ThreadCard({
               />
             </Link>
 
-            <div className='thread-card_bar' />
+            <div className='thread-card_bar'/>
           
           </div>
 
