@@ -4,8 +4,9 @@ import * as z from "zod";
 import Image from "next/image";
 import { useForm } from "react-hook-form";
 import { usePathname, useRouter } from "next/navigation";
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useState, useEffect} from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
+
 
 import {
   Form,
@@ -53,6 +54,17 @@ const AccountProfile = ({ user, btnTitle }: Props) => {
       bio: user?.bio ? user.bio : "",
     },
   });
+
+  useEffect(() => {
+  if (user) {
+    form.reset({
+      profile_photo: user.image || "",
+      name: user.name || "",
+      username: user.username || "",
+      bio: user.bio || "",
+    });
+  }
+}, [user, form]);
 
   const onSubmit = async (values: z.infer<typeof UserValidation>) => {
     const blob = values.profile_photo;
